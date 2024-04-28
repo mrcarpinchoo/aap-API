@@ -7,7 +7,7 @@ const express = require('express');
 
 // project modules
 const authRouter = require('./router/authRouter');
-const forumRouter = require('./router/forumRouter');
+const chatRouter = require('./router/chatRouter');
 const imageRouter = require('./router/imageRouter');
 const petRouter = require('./router/petRouter');
 const userRouter = require('./router/userRouter');
@@ -25,7 +25,7 @@ app.use(express.json());
 
 // routes
 app.use('/api/auth', authRouter);
-app.use('/api/forums', forumRouter);
+app.use('/api/chats', chatRouter);
 app.use('/api/images', imageRouter);
 app.use('/api/pets', petRouter);
 app.use('/api/users', userRouter);

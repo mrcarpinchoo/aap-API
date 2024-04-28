@@ -10,6 +10,6 @@ const wishlistSchema = mongoose.Schema({});
 
 // Wishlist CRUD operations -----
 
-const Wishlist = mongoose.model('Wishlist', wishlistSchema);
+const dbWishlist = mongoose.model('Wishlist', wishlistSchema);
 
-module.exports = Wishlist;
+module.exports = dbWishlist;

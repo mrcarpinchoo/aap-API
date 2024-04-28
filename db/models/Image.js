@@ -10,6 +10,6 @@ const imageSchema = mongoose.Schema({});
 
 // Image CRUD operations -----
 
-const Image = mongoose.model('Image', imageSchema);
+const dbImage = mongoose.model('Image', imageSchema);
 
-module.exports = Image;
+module.exports = dbImage;

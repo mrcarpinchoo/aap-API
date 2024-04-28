@@ -10,6 +10,6 @@ const petSchema = mongoose.Schema({});
 
 // Pet CRUD operations -----
 
-const Pet = mongoose.model('Pet', petSchema);
+const dbPet = mongoose.model('Pet', petSchema);
 
-module.exports = Pet;
+module.exports = dbPet;
