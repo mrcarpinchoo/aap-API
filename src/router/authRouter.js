@@ -9,8 +9,8 @@ const jwt = require('jsonwebtoken');
 const {
     validateReqBody,
     getUserFromDb,
-    checkEmailExistenceInDb,
-    comparePasswords
+    checkEmailExistence,
+    validatePassword
 } = require('../middleware/authMiddleware');
 
 const router = express.Router();
@@ -21,15 +21,18 @@ router.post(
     '/login',
     validateReqBody,
     getUserFromDb,
-    checkEmailExistenceInDb,
-    comparePasswords,
+    checkEmailExistence,
+    validatePassword,
     (req, res) => {
-        const user = req.body.user; // req.body.user is declared in the getUser middleware function
+        const { _id, uuid, email } = req.body.user; // req.body.user is declared in the getUserFromDb middleware function
 
         const token = jwt.sign(
-            { email: user.email, _id: user._id },
+            { _id, uuid, email },
             process.env.JWT_PRIVATE_KEY,
-            { algorithm: 'HS256', expiresIn: '1h' }
+            {
+                algorithm: 'HS256',
+                expiresIn: '1h'
+            }
         );
 
         return res.status(200).send({ token });

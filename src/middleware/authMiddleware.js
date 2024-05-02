@@ -15,13 +15,13 @@ function validateReqBody(req, res, next) {
     try {
         User.validateEmail(email);
     } catch (err) {
-        return res.status(400).send({ err });
+        return res.status(400).send({ err: err.message });
     }
 
     try {
         User.validatePassword(password);
     } catch (err) {
-        return res.status(400).send({ err });
+        return res.status(400).send({ err: err.message });
     }
 
     next();
@@ -34,12 +34,12 @@ function validateReqBody(req, res, next) {
 async function getUserFromDb(req, res, next) {
     const { email } = req.body;
 
-    req.body.user = await dbUser.findUser(email);
+    req.body.user = await dbUser.getUserByEmail(email);
 
     next();
 }
 
-function checkEmailExistenceInDb(req, res, next) {
+function checkEmailExistence(req, res, next) {
     const found = req.body.user !== null;
 
     if (!found) return res.status(404).send({ err: 'User email not found.' });
@@ -47,7 +47,7 @@ function checkEmailExistenceInDb(req, res, next) {
     next();
 }
 
-function comparePasswords(req, res, next) {
+function validatePassword(req, res, next) {
     const { password } = req.body;
     const user = req.body.user;
 
@@ -57,27 +57,9 @@ function comparePasswords(req, res, next) {
     next();
 }
 
-function authorize(req, res, next) {
-    const token = req.get('x-token');
-
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY, {
-            algorithm: 'HS256'
-        });
-
-        req._id = decoded._id;
-        req.email = decoded.email;
-    } catch (err) {
-        return res.status(401).send({ err });
-    }
-
-    next();
-}
-
 module.exports = {
     validateReqBody,
     getUserFromDb,
-    checkEmailExistenceInDb,
-    comparePasswords,
-    authorize
+    checkEmailExistence,
+    validatePassword
 };

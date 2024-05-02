@@ -7,11 +7,12 @@ const express = require('express');
 
 // project modules
 const authRouter = require('./router/authRouter');
-const chatRouter = require('./router/chatRouter');
 const imageRouter = require('./router/imageRouter');
 const petRouter = require('./router/petRouter');
 const userRouter = require('./router/userRouter');
 const wishlistRouter = require('./router/wishlistRouter');
+const messageRouter = require('./router/messageRouter');
+const requestRouter = require('./router/requestRouter');
 
 dotenv.config(); // loads .env file contents into process.env
 
@@ -25,10 +26,11 @@ app.use(express.json());
 
 // routes
 app.use('/api/auth', authRouter);
-app.use('/api/chats', chatRouter);
 app.use('/api/images', imageRouter);
 app.use('/api/pets', petRouter);
 app.use('/api/users', userRouter);
 app.use('/api/wishlists', wishlistRouter);
+app.use('/api/messages', messageRouter);
+app.use('/api/requests', requestRouter);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

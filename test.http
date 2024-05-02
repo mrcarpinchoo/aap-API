@@ -1,0 +1,149 @@
+@host = http://localhost:4000
+@users = http://localhost:4000/api/users
+@auth = http://localhost:4000/api/auth
+@wishlists = http://localhost:4000/api/wishlists
+
+### users test
+
+### memo
+POST {{users}}
+Content-Type: application/json
+
+{
+    "name": "Lionel Messi",
+    "email": "lionel.messi@iteso.mx",
+    "password": "argentina"
+}
+
+###
+PUT {{users}}
+Content-Type: application/json
+x-token: 
+
+{
+    "name": "Lewis Hamilton",
+    "email": "lewis.hamilton@iteso.mx",
+    "password": "england"
+}
+
+###
+POST {{auth}}/login
+Content-Type: application/json
+
+{
+    "email": "cristiano.ronaldo@iteso.mx",
+    "password": "portugal"
+}
+
+GET {{wishlists}}/my-wishlist
+x-token: 
+
+###
+PUT {{wishlists}}/my-wishlist/add/Th8I8sCNfx
+x-token: 
+
+###
+PUT {{wishlists}}/my-wishlist/remove/Th8I8sCNfx
+x-token: 
+
+###
+DELETE {{users}}
+x-token: 
+
+### rorro
+###
+POST {{host}}/api/pets
+Content-Type: application/json
+
+{
+    "name": "Frida",
+    "description": "Very active and energetic dog.",
+    "breed": "Jack Russell",
+    "age": 6,
+    "ownerEmail": "cristiano.ronaldo@iteso.mx",
+    "weight": 18,
+    "location": "CDMX",
+    "character": "Active",
+    "conditions": "Healthy",
+    "vaccinations": "Up to date"
+}
+
+###
+GET {{host}}/api/pets?breed=Labrador
+Content-Type: application/json
+
+
+###
+PUT {{host}}/api/pets/Th8I8sCNfx
+Content-Type: application/json
+
+{
+    "name": "Carlos",
+    "description": "A playful dog with lots of energy! (Edited)",
+    "breed": "Labrador",
+    "age": 12,
+    "ownerEmail": "cristiano.ronaldo@iteso.mx",
+    "weight": 30,
+    "location": "New York",
+    "character": "Friendly",
+    "conditions": "Diabetes",
+    "vaccinations": "Rabies, Distemper, Adenovirus"
+}
+
+//methods for images
+
+###
+POST {{host}}/api/images/<petuuid>
+Content-Type: application/json
+
+{
+    "name": "ImgSample",
+    "url": "https://sample.jpg",
+    "description": "A sample image for our video",
+    "binary": "binary"
+}
+
+
+###
+GET {{host}}/api/images/<petuuid>
+Content-Type: application/json
+
+###
+GET {{host}}/api/images/image/662ee419b9e4e4313e470499
+Content-Type: application/json
+
+### niki
+###
+POST {{host}}/api/messages/<petUuid>
+Content-Type: application/json
+
+{
+    "userEmail": "lionel.messi@iteso.mx",
+    "ownerEmail": "cristiano.ronaldo@iteso.mx",
+    "date": 02-05-2024,
+    "content": "Hello! I'm interested in adopting the pet. Can you provide me with more information?"
+}
+
+###
+GET {{host}}/api/messages/<petUuid>
+
+###
+POST {{host}}/api/requests/<petUuid>
+Content-Type: application/json
+
+{
+    "userFirstName": "Lionel",
+    "userLastName": "Messi",
+    "userCity": "Barcelona",
+    "userState": "Catalonia",
+    "userPostalCode": "08028",
+    "userDirection": "Carrer de la Maternitat, 08028 Barcelona, Spain",
+    "userAge": 34,
+    "userCouple": "Yes",
+    "userChildren": 3,
+    "userEmail": "lionel.messi@iteso.mx",
+    "ownerEmail": "cristiano.ronaldo@iteso.mx"
+}
+
+###
+GET {{host}}/api/requests/<petUuid>
